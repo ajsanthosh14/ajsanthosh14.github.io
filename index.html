@@ -133,6 +133,27 @@
   .peak-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);display:block;margin:4px 0 12px}
   @media(max-width:700px){.hike-stats{grid-template-columns:1fr}.hike-stat{min-height:120px}}
 
+  /* Muay Thai progression */
+  .life-subhead{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);display:block;margin:34px 0 12px}
+  .mt-card{background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden;margin:0 0 30px}
+  .mt-head{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:24px 26px;border-bottom:1px solid var(--line)}
+  .mt-title .cap,.mt-rank .cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(36,29,46,.6)}
+  .mt-title h3{font-family:var(--display);font-size:30px;margin:3px 0 0;line-height:1}
+  .mt-title p{margin:8px 0 0;color:var(--dim);font-size:14px}
+  .mt-logo{width:94px;height:94px;border-radius:22px;background:var(--ink);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 auto;font-family:var(--display);text-align:center;box-shadow:0 10px 26px rgba(36,29,46,.12)}
+  .mt-logo b{font-size:28px;line-height:.9}.mt-logo span{font-family:var(--mono);font-size:8px;letter-spacing:.08em;margin-top:7px;opacity:.75}
+  .mt-grid{display:grid;grid-template-columns:1.25fr repeat(3,1fr);gap:12px;padding:18px}
+  .mt-rank{min-height:165px;border-radius:22px;padding:18px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+  .mt-rank.start{background:linear-gradient(135deg,var(--sky),var(--mint))}.mt-rank.white{background:var(--card);border:1px solid var(--line)}.mt-rank.yellow{background:var(--yellow)}.mt-rank.orange{background:#f8a45c}
+  .mt-rank .rank-date{margin-top:auto;font-family:var(--mono);font-size:10px;text-transform:uppercase;opacity:.65}
+  .mt-rank .rank-name{font-family:var(--display);font-weight:700;font-size:28px;line-height:1;margin-top:7px}
+  .mt-rank .orb{position:absolute;width:80px;height:80px;border-radius:50%;right:-22px;top:-22px;background:rgba(255,255,255,.18)}
+  .mt-current{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;text-transform:uppercase;border-radius:99px;padding:5px 9px;background:rgba(36,29,46,.1);width:max-content}
+  .mt-story{padding:22px 26px 26px;font-size:16px}.mt-story b{font-weight:600}
+  .mt-future{margin:0 18px 18px;border-radius:20px;padding:16px 18px;background:var(--bg);border:1px dashed rgba(36,29,46,.16);font-size:13px;color:var(--dim)}
+  @media(max-width:760px){.mt-head{align-items:flex-start}.mt-logo{width:78px;height:78px}.mt-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.mt-grid{grid-template-columns:1fr}.mt-head{flex-direction:column}}
+
   /* story */
   .story{display:block;background:var(--grad);border-radius:26px;padding:clamp(26px,4.4vw,46px);color:var(--ink);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
   .story:hover{transform:translateY(-6px)}
@@ -384,6 +405,52 @@
     <ul class="peaks rv">
       <li>Pikes Peak</li><li>Mt. Elbert</li><li>Longs Peak</li><li>Mt. Princeton</li><li>Mt. Lincoln</li><li>Mt. Cameron</li><li>Mt. Bross</li><li>Mt. Democrat</li><li>Missouri Mountain</li><li>Mt. Bierstadt</li><li>Mt. Blue Sky</li><li>Grays Peak</li><li>Torreys Peak</li><li>Quandary Peak</li>
     </ul>
+
+    <span class="life-subhead rv">Muay Thai</span>
+    <div class="mt-card rv">
+      <div class="mt-head">
+        <div class="mt-title">
+          <span class="cap">Training at</span>
+          <h3>McMahon Training Center</h3>
+          <p>Fort Collins, Colorado · Muay Thai progression</p>
+        </div>
+        <div class="mt-logo" aria-label="McMahon Training Center badge">
+          <b>MTC</b>
+          <span>MCMAHON<br>TRAINING CENTER</span>
+        </div>
+      </div>
+
+      <div class="mt-grid">
+        <div class="mt-rank start">
+          <span class="mt-current">🥊 journey begins</span>
+          <span class="orb"></span>
+          <span class="rank-date">Mar 21, 2026</span>
+          <span class="rank-name">First class</span>
+        </div>
+        <div class="mt-rank white">
+          <span class="cap">First rank</span>
+          <span class="orb"></span>
+          <span class="rank-date">Apr 7, 2026</span>
+          <span class="rank-name">White shirt</span>
+        </div>
+        <div class="mt-rank yellow">
+          <span class="cap">Promotion</span>
+          <span class="orb"></span>
+          <span class="rank-date">May 19, 2026</span>
+          <span class="rank-name">Yellow shirt</span>
+        </div>
+        <div class="mt-rank orange">
+          <span class="mt-current">current rank</span>
+          <span class="orb"></span>
+          <span class="rank-date">Jun 23, 2026</span>
+          <span class="rank-name">Orange shirt</span>
+        </div>
+      </div>
+
+      <div class="mt-story">Started training Muay Thai in March 2026. What began as another way to stay active turned into one of the hardest and most rewarding parts of my week — <b>show up, get uncomfortable, improve, repeat.</b></div>
+      <div class="mt-future">More milestones coming — next shirt rank, class-count milestones, sparring progress, seminars, and whatever comes after.</div>
+    </div>
+
     <p class="lead rv">Colorado turned out to be the other half of the job. Mountains teach the same thing debugging does: you don't get the view unless you take the next step, and the route you planned isn't always the route you're on. Rest of the week I'm at Muay Thai — same lesson, smaller room. The hardest part happens before you walk through the door.</p>
     <p class="lead rv">I love outreach and community activities — one such is STEM outreach with local youth programs when I can find the time.</p>
   </div>
