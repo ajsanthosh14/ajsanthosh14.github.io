@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Santhosh ✦ Embedded Engineer & Mountain Guy</title>
+<meta name="description" content="Santhosh — embedded software engineer in Colorado. Firmware, Yocto, 14ers, and a memoir on the side.">
+<meta property="og:title" content="Santhosh ✦ Embedded Engineer & Mountain Guy">
+<meta property="og:description" content="Firmware by day, summits by weekend. Colorado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf7f1;
+    --card:#ffffff;
+    --ink:#241d2e;
+    --dim:#7a7288;
+    --line:rgba(36,29,46,.08);
+    --lav:#c9b6ff;
+    --mint:#a8e6c9;
+    --peach:#ffc6a8;
+    --sky:#a8d8ff;
+    --pink:#ffb3d1;
+    --yellow:#ffe08a;
+    --flag:#ff6b6b;
+    --grad: linear-gradient(120deg, var(--lav), var(--sky) 45%, var(--mint) 100%);
+    --display:"Fredoka","Helvetica Neue",sans-serif;
+    --body:"Space Grotesk",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--lav);color:var(--ink)}
+  :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 clamp(18px,4vw,44px)}
+  .mono{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+
+  /* blobs */
+  .blob{position:absolute;filter:blur(60px);opacity:.55;z-index:0;border-radius:50%;pointer-events:none}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:80;background:rgba(251,247,241,.75);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:6px;height:66px}
+  nav .name{font-family:var(--display);font-weight:700;font-size:19px;margin-right:auto;display:flex;align-items:center;gap:6px}
+  nav a.lk{font-family:var(--body);font-weight:500;font-size:14px;color:var(--dim);padding:9px 14px;border-radius:99px;transition:color .2s,background .2s}
+  nav a.lk:hover{color:var(--ink);background:var(--card)}
+  @media (max-width:780px){nav a.lk{display:none}nav a.lk.keep{display:inline-block}}
+
+  /* hero */
+  header{position:relative;padding:clamp(50px,9vw,100px) 0 40px;overflow:hidden}
+  .kicker{display:inline-flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);padding:8px 16px;border-radius:99px;font-family:var(--body);font-weight:500;font-size:13.5px}
+  .kicker .dot{width:8px;height:8px;border-radius:99px;background:var(--mint);animation:pulse 2.2s ease-in-out infinite}
+  @keyframes pulse{50%{opacity:.4;transform:scale(.75)}}
+  .huge{font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:.95;font-size:clamp(48px,10.5vw,118px);margin:22px 0 0;position:relative;z-index:1}
+  .huge .hi{background:var(--grad);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .tagline{font-size:clamp(18px,2.4vw,24px);max-width:44ch;margin:22px 0 0;color:var(--ink);font-weight:400}
+  .tagline b{font-weight:600}
+  .scrollcue{margin-top:34px;display:inline-flex;gap:8px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--dim)}
+
+  section{padding:clamp(50px,8vw,96px) 0;position:relative}
+  h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,5vw,48px);letter-spacing:-.02em;line-height:1.02;margin:8px 0 30px}
+  h3{font-family:var(--display);font-weight:600;margin:0}
+  p{margin:0 0 16px}
+  .eyebrow{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 14px}
+
+  /* bento */
+  .bento{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;min-height:140px;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+  .tile:hover{transform:translateY(-5px) rotate(-.5deg);box-shadow:0 16px 40px rgba(36,29,46,.08)}
+  .tile .big{font-family:var(--display);font-weight:700;font-size:clamp(28px,4.6vw,42px);line-height:1}
+  .tile .cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+  .t-wide{grid-column:span 2}
+  .t-lav{background:var(--lav)} .t-mint{background:var(--mint)} .t-peach{background:var(--peach)} .t-sky{background:var(--sky)} .t-pink{background:var(--pink)}
+  .t-lav,.t-mint,.t-peach,.t-sky,.t-pink{border-color:transparent}
+  .t-lav .cap,.t-mint .cap,.t-peach .cap,.t-sky .cap,.t-pink .cap{color:rgba(36,29,46,.6)}
+  @media (max-width:820px){.bento{grid-template-columns:repeat(2,1fr)}.t-wide{grid-column:span 2}}
+
+  .lead{font-size:clamp(16px,1.9vw,19px);max-width:62ch;color:var(--ink)}
+
+  /* work cards */
+  .projgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media (max-width:800px){.projgrid{grid-template-columns:1fr}}
+  .proj{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:26px;display:flex;flex-direction:column;gap:14px;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+  .proj:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(36,29,46,.1)}
+  .proj .no{font-family:var(--mono);font-size:11px;color:var(--dim)}
+  .proj h3{font-size:clamp(20px,2.6vw,26px)}
+  .proj .desc{color:var(--dim);font-size:15px;margin:0}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+  .chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:5px 11px;color:var(--dim)}
+  .proj .go{font-family:var(--body);font-weight:600;font-size:13.5px;display:inline-flex;gap:6px;align-items:center;margin-top:4px}
+  .proj:hover .go i{transform:translateX(4px)}
+  .proj .go i{font-style:normal;transition:transform .25s}
+
+  /* stack */
+  .stackgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  .stackcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px}
+  .stackcard .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;display:block}
+  .stackcard .v{font-size:15px}
+
+  /* timeline */
+  .job{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px 26px;margin-bottom:14px}
+  .job .hd{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline}
+  .job h3{font-size:clamp(17px,2.3vw,21px)}
+  .job .when{font-family:var(--mono);font-size:11px;color:var(--dim);white-space:nowrap;background:var(--bg);border-radius:99px;padding:4px 11px}
+  .job ul{margin:12px 0 0;padding-left:18px;color:var(--dim)}
+  .job li{margin-bottom:6px;font-size:14.5px}
+  .job li::marker{color:var(--lav)}
+
+  /* peaks */
+  .peaks{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0 0 26px}
+  .peaks li{font-family:var(--body);font-weight:500;font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:8px 15px;transition:background .2s,transform .2s}
+  .peaks li:hover{background:var(--mint);transform:translateY(-2px)}
+
+  /* story */
+  .story{display:block;background:var(--grad);border-radius:26px;padding:clamp(26px,4.4vw,46px);color:var(--ink);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+  .story:hover{transform:translateY(-6px)}
+  .story h3{font-family:var(--display);font-weight:700;font-size:clamp(26px,5vw,46px);line-height:1.02;margin:14px 0}
+  .story .ex{font-size:clamp(15px,2vw,18px);max-width:48ch;margin:0;color:rgba(36,29,46,.75)}
+  .story .go{display:inline-flex;gap:8px;align-items:center;margin-top:22px;font-family:var(--body);font-weight:600;font-size:13.5px}
+  .story:hover .go i{transform:translateX(5px)}
+  .story .go i{font-style:normal;transition:transform .25s}
+
+  /* contact */
+  .big-links a{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 24px;margin-bottom:10px;background:var(--card);border:1px solid var(--line);border-radius:20px;font-family:var(--display);font-weight:600;font-size:clamp(17px,2.8vw,24px);transition:transform .25s,background .25s}
+  .big-links a:hover{transform:translateX(6px);background:var(--yellow)}
+  .big-links .h{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:400}
+  footer{padding:36px 0 60px;color:var(--dim)}
+  footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:var(--body);font-size:13.5px}
+
+  .ph{font-family:var(--mono);font-size:.85em;color:var(--flag);border-bottom:1px dotted var(--flag)}
+
+  .rv{opacity:0;transform:translateY(20px)}
+  .rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+    .rv{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="name">👋 Santhosh</span>
+    <a class="lk" href="#work">Work</a>
+    <a class="lk" href="#stack">Toolbox</a>
+    <a class="lk" href="#journey">Journey</a>
+    <a class="lk" href="#education">Education</a>
+    <a class="lk" href="#life">Life</a>
+    <a class="lk keep" href="#stories">Stories</a>
+    <a class="lk keep" href="#contact">Say hi</a>
+  </div>
+</nav>
+
+<header>
+  <div class="blob" style="width:420px;height:420px;background:var(--lav);top:-140px;right:-120px"></div>
+  <div class="blob" style="width:340px;height:340px;background:var(--peach);top:120px;left:-140px"></div>
+  <div class="wrap">
+    <span class="kicker"><span class="dot"></span>Embedded Software Engineer III · Hach · Loveland, CO</span>
+    <h1 class="huge">hey, i'm<br><span class="hi">Santhosh</span> ✦</h1>
+    <p class="tagline">I write firmware for machines that measure water and quietly keep running for years — <b>no one notices until it breaks, that's the goal.</b> Off the clock: chasing 14ers, throwing hands at Muay Thai, and writing a memoir nobody asked for.</p>
+    <div class="scrollcue">↓ keep scrolling, it gets better</div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="bento rv">
+      <div class="tile t-lav t-wide">
+        <span class="cap">rn i'm at</span>
+        <div><span class="big">Hach</span><p style="margin:6px 0 0;font-size:14px;opacity:.8">Firmware for water-quality instruments. Bare-metal and embedded Linux, both.</p></div>
+      </div>
+      <div class="tile">
+        <span class="cap">14ers summited</span>
+        <span class="big">14 ⛰️</span>
+      </div>
+      <div class="tile">
+        <span class="cap">years shipping code</span>
+        <span class="big">3+</span>
+      </div>
+      <div class="tile t-wide">
+        <span class="cap">studied</span>
+        <div><span class="big" style="font-size:clamp(18px,3vw,28px)">MS, CU Boulder</span><p style="margin:6px 0 0;font-size:14px;color:var(--dim)">Electrical engineering — embedded systems & IoT. Before that, ECE in Mysuru, India.</p></div>
+      </div>
+      <div class="tile t-mint">
+        <span class="cap">side quests</span>
+        <span style="font-size:15px">Muay Thai and long drives toward mountains</span>
+      </div>
+      <div class="tile t-peach">
+        <span class="cap">building rn</span>
+        <span style="font-size:15px">The best version of myself — gym, boxing, and everything in between</span>
+      </div>
+    </div>
+
+    <p class="lead rv" style="margin-top:44px">I got interested in electronics early and ended up doing my ECE degree in Mysuru — a quiet city, the cultural heart of Karnataka, the kind of place where you could actually hear yourself think. Then I moved to Boulder for a master's, and somewhere along the way stopped asking how systems work and became the person who has to <i>make</i> them work. My favorite part is the bit nobody sees — wiring up hardware, flashing firmware, staring at logs until the one broken line finally shows itself.</p>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <span class="eyebrow rv">🛠️ built &amp; shipped</span>
+    <h2 class="rv">Stuff I built that<br>had to actually work.</h2>
+
+    <div class="projgrid">
+      <a class="proj rv" href="https://github.com/AJSANTHOSH-COM/SelfBalancingBotFirmware">
+        <span class="no">01</span>
+        <h3>Self-Balancing Line Follower</h3>
+        <p class="desc">An assistant bot built around an unstable-equilibrium balancing system, so it can absorb a temporary disturbance mid-route instead of tipping over. Won Outstanding Project of the Year 2021 and turned into a review paper in IJERT.</p>
+        <div class="chips"><span class="chip">C++</span><span class="chip">Python</span><span class="chip">I²C</span><span class="chip">Control loop</span></div>
+        <span class="go">Peek the code <i>→</i></span>
+      </a>
+
+      <div class="proj rv">
+        <span class="no">02</span>
+        <h3>VIGIL — the Sky Sniper</h3>
+        <p class="desc">An autonomous patrol drone built on a BeagleBone Black, using LoRa to cut latency in both taking action and storing data — so it can act on what it sees in the air without waiting on a slow link.</p>
+        <div class="chips"><span class="chip">BeagleBone Black</span><span class="chip">Autonomous</span><span class="chip">MAVLink</span><span class="chip">LoRa</span></div>
+      </div>
+
+      <a class="proj rv" href="https://github.com/cu-ecen-aeld/final-project-ajsanthosh14/wiki/Project-Overview">
+        <span class="no">03</span>
+        <h3>BBB Video Streaming Device</h3>
+        <p class="desc">A custom Linux distribution for the BeagleBone Black, built with Yocto from source — cross-compiled userspace, custom root filesystem, boot chain wired by hand. On top of that, GStreamer UDP pipelines unicast and multicast live video across multiple devices at once. Same ground I now cover at work with Yocto and BSP.</p>
+        <div class="chips"><span class="chip">Yocto</span><span class="chip">GStreamer</span><span class="chip">UDP</span><span class="chip">Cross-compile</span></div>
+        <span class="go">Peek the wiki <i>→</i></span>
+      </a>
+
+      <a class="proj rv" href="https://github.com/CUB-ESE/ECEN-5813-Morse_Code_Interpreter">
+        <span class="no">04</span>
+        <h3>Morse code interpreter</h3>
+        <p class="desc">Firmware that converts tap-button input into a light-source Morse output in real time — a dot and a dash differ by milliseconds, so there's zero room to buffer and think about it later.</p>
+        <div class="chips"><span class="chip">C</span><span class="chip">Bare-metal</span><span class="chip">Interrupts</span></div>
+        <span class="go">Peek the code <i>→</i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <span class="eyebrow rv">🧰 the toolbox</span>
+    <h2 class="rv">What I actually<br>reach for.</h2>
+    <div class="stackgrid rv">
+      <div class="stackcard"><span class="k">Languages</span><span class="v">C, C++, Python, Shell, x86 assembly</span></div>
+      <div class="stackcard"><span class="k">Firmware &amp; systems</span><span class="v">Bare-metal &amp; Linux-based firmware, RTOS, device drivers, robotics, sensor integration under tight memory/power budgets</span></div>
+      <div class="stackcard"><span class="k">Embedded Linux</span><span class="v">Yocto, BusyBox, Crosstool-NG, BSP components, device trees, kernel dev, cross-compilation, swupdate, NGINX</span></div>
+      <div class="stackcard"><span class="k">Protocols</span><span class="v">MQTT, HTTP, Protobuf, Modbus, I²C, SPI, UART, RS232, LoRa, Bluetooth LE, Wi-Fi, PCIe, CXL, DMA</span></div>
+      <div class="stackcard"><span class="k">Hardware</span><span class="v">BeagleBone Black &amp; Blue, Raspberry Pi, MSP432, Jetson Nano, FRDM-KL25Z, LMX2572P, ESP8266, Intel server processors, STM/Atmel/Arm/TI (Sitara) controllers</span></div>
+      <div class="stackcard"><span class="k">On device</span><span class="v">SQLite for data acquisition that survives power loss, ORM, OOP</span></div>
+      <div class="stackcard"><span class="k">Lifecycle</span><span class="v">Firmware update infra across products, validation, perf tuning</span></div>
+      <div class="stackcard"><span class="k">Debug &amp; sim</span><span class="v">JTAG, GDB, Valgrind, oscilloscope, logic analyzer, Simics, DML</span></div>
+      <div class="stackcard"><span class="k">Tools</span><span class="v">Git, CI/CD, Jenkins, Docker, GCC, TI CCS, MATLAB, OpenMP, GTest, test automation</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="journey">
+  <div class="wrap">
+    <span class="eyebrow rv">📈 the journey</span>
+    <h2 class="rv">Where I've been.</h2>
+
+    <div class="job rv">
+      <div class="hd"><h3>Embedded Software Engineer III · Hach</h3><span class="when">Jul 2025 — now</span></div>
+      <ul>
+        <li>Own the design of SC (Smart Communication) Gateway builds for new controllers, wiring up new communication protocols and Modbus modules.</li>
+        <li>These gateways bridge different Hach sensors to field SCADA systems, so industrial customers can pull instrument data straight into their own integration stack.</li>
+      </ul>
+    </div>
+    <div class="job rv">
+      <div class="hd"><h3>Embedded Software / Firmware Engineer II · Hach</h3><span class="when">Jun 2023 — Jun 2025</span></div>
+      <ul>
+        <li>Core member of the Platform Development Team, supporting three concurrent new-product teams building on the same platform.</li>
+        <li>Led the design and implementation of data acquisition and management on the controller — HTTP, MQTT, SQLite, ORM, and OOP working together to move data cleanly.</li>
+        <li>Contributed to the architecture and integration of a new controller built on the platform.</li>
+        <li>Owned the firmware update process across three products — the path by which fielded devices get fixed, kept seamless and compatible.</li>
+        <li>Built and maintained BSP components (device trees), package management, and Protocol Buffers for a common device interface.</li>
+        <li>Managed CI/CD pipelines and Jenkins workflows inside the Yocto environment to keep development moving.</li>
+      </ul>
+    </div>
+    <div class="job rv">
+      <div class="hd"><h3>Graduate Teaching Assistant, Compiler Construction · CU Boulder</h3><span class="when">Jan 2023 — present</span></div>
+      <ul>
+        <li>Built a compiler for Python, written in Python and C, with real optimization passes.</li>
+        <li>Compiler features: type checking, register allocation, liveness analysis, local value numbering (folding), dead store elimination, control flow graphing, grammar checking, escape analysis.</li>
+      </ul>
+    </div>
+    <div class="job rv">
+      <div class="hd"><h3>System Software Engineer Intern · Intel</h3><span class="when">Summer &amp; Fall 2022</span></div>
+      <ul>
+        <li>Developed and tested software simulator models (virtual platform) for server system-on-chip and platform.</li>
+        <li>Collaborated on simulated transaction-level models for PCI-Express and CXL links.</li>
+        <li>Built a standalone Simics IP services driver firmware model for peripheral isolation testing.</li>
+        <li>Modeled and tested SoC PCIe root port enumeration, link training, bifurcation, and memory interleaving.</li>
+        <li>Developed and tested functional and behavioral models for PCIe 6.0 and CXL 3.0 devices.</li>
+      </ul>
+    </div>
+    <div class="job rv">
+      <div class="hd"><h3>Firmware Engineer · JILA</h3><span class="when">Aug 2021 — May 2022</span></div>
+      <ul>
+        <li>Supported development of embedded Linux, digital systems, and drivers for physics instrumentation.</li>
+        <li>Helped manage end-to-system firmware development and the design of a solid platform and services.</li>
+      </ul>
+    </div>
+    <div class="job rv">
+      <div class="hd"><h3>R&amp;D Project Intern · Würth Elektronik</h3><span class="when">Mar — May 2021</span></div>
+      <ul><li>Built i3, the Intelligent Impedance Integrator — impedance matching and multi-layer PCB stack-ups, with the Signal Integrity team.</li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <span class="eyebrow rv">🎓 education</span>
+    <h2 class="rv">What I studied.</h2>
+    <div class="job rv">
+      <div class="hd"><h3>MS, Electrical &amp; Electronics Engineering — Embedded Systems &amp; IoT · CU Boulder</h3><span class="when">May 2023 · GPA 3.88</span></div>
+      <ul><li>Coursework: Embedded System Design, Advanced Embedded Software Development, Compiler Construction, Concurrent Programming.</li></ul>
+    </div>
+    <div class="job rv">
+      <div class="hd"><h3>BE, Electronics &amp; Communication Engineering · Visvesvaraya Technological University</h3><span class="when">May 2021 · GPA 8.8/10</span></div>
+      <ul>
+        <li>Vidyavardhaka College of Engineering, Mysuru.</li>
+        <li>Published <a href="https://www.ijert.org/a-review-on-self-balancing-line-follewer-robot" style="color:var(--ink);text-decoration:underline">"A Review on Self-Balancing Line Follower Robot"</a>, IJERT, Jan 2021.</li>
+        <li>Outstanding Project of the Year 2021, Department of ECE.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="life">
+  <div class="wrap">
+    <span class="eyebrow rv">⛰️ off the clock</span>
+    <h2 class="rv">Fourteen summits<br>and a heavy bag.</h2>
+    <ul class="peaks rv">
+      <li>Pikes Peak</li><li>Mt. Elbert</li><li>Longs Peak</li><li>Mt. Princeton</li><li>Mt. Lincoln</li><li>Mt. Cameron</li><li>Mt. Bross</li><li>Mt. Democrat</li><li>Missouri Mountain</li><li>Mt. Bierstadt</li><li>Mt. Blue Sky</li><li>Grays Peak</li><li>Torreys Peak</li><li>Quandary Peak</li>
+    </ul>
+    <p class="lead rv">Colorado turned out to be the other half of the job. Mountains teach the same thing debugging does: you don't get the view unless you take the next step, and the route you planned isn't always the route you're on. Rest of the week I'm at Muay Thai — same lesson, smaller room. The hardest part happens before you walk through the door.</p>
+    <p class="lead rv">I love outreach and community activities — one such is STEM outreach with local youth programs when I can find the time.</p>
+  </div>
+</section>
+
+<section id="stories">
+  <div class="wrap">
+    <span class="eyebrow rv">📖 not just code</span>
+    <h2 class="rv">I try to turn my life<br>into a decent story.</h2>
+    <a class="story rv" href="the-life-i-thought-i-wanted.html">
+      <span class="mono" style="color:rgba(36,29,46,.6)">12 chapters · ~25 min read · mostly true, occasionally funny</span>
+      <h3>The Life I Thought I Wanted</h3>
+      <p class="ex">I crossed an ocean to build a life, then stood inside that life wondering where home was. Tried to make it funny anyway.</p>
+      <span class="go">Open the book <i>→</i></span>
+    </a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <span class="eyebrow rv">💌 say hi</span>
+    <h2 class="rv">Let's talk.</h2>
+    <div class="big-links rv">
+      <a href="mailto:ajsanthosh12@gmail.com"><span>Email</span><span class="h">ajsanthosh12@gmail.com</span></a>
+      <a href="https://www.linkedin.com/in/ajsanthosh14/"><span>LinkedIn</span><span class="h">/in/ajsanthosh14</span></a>
+      <a href="https://github.com/ajsanthosh14"><span>GitHub</span><span class="h">@ajsanthosh14</span></a>
+      <a href="https://instagram.com/ajcentos"><span>Instagram</span><span class="h">@ajcentos</span></a>
+      <a href="resume.pdf"><span>Résumé</span><span class="h">PDF</span></a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <span>Santhosh · Colorado ✦ made with too much coffee</span>
+  <span>2026</span>
+</div></footer>
+
+<script>
+(function(){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:.12,rootMargin:'0px 0px -40px'});
+  document.querySelectorAll('.rv').forEach(function(el,i){el.style.transitionDelay=(i%4)*60+'ms';io.observe(el)});
+})();
+</script>
+</body>
+</html>

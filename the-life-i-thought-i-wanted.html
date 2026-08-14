@@ -1,0 +1,1281 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Life I Thought I Wanted — AJ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#101620; --bg2:#161e2a; --ink:#d7dde5; --dim:#8695a6;
+    --rule:rgba(215,221,229,.14); --glacial:#74b6c4; --marigold:#e3a63b;
+    --shade:rgba(116,182,196,.10);
+    --scale:1;
+    --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+    --body:"Spectral",Iowan Old Style,Georgia,serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+    --rail:78px;
+  }
+  html[data-theme="snow"]{
+    --bg:#e7eae6; --bg2:#dde1dd; --ink:#1a2129; --dim:#5d6a73;
+    --rule:rgba(26,33,41,.16); --glacial:#2b7284; --marigold:#a56d13;
+    --shade:rgba(43,114,132,.10);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:var(--body); font-weight:300;
+    -webkit-font-smoothing:antialiased;
+    transition:background .5s ease,color .5s ease;
+  }
+  ::selection{background:var(--shade)}
+
+  /* ---------- utility type ---------- */
+  .mono{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+
+  /* ---------- top bar ---------- */
+  header{
+    position:fixed; inset:0 0 auto 0; z-index:40; height:52px;
+    display:flex; align-items:center; gap:14px; padding:0 18px;
+    background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--rule);
+    transform:translateY(-100%); transition:transform .35s ease;
+  }
+  body[data-view="read"] header{transform:none}
+  .brand{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .brand b{color:var(--ink); font-weight:500}
+  .spacer{flex:1}
+  button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
+  .btn{
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--dim); padding:7px 11px; border:1px solid var(--rule); border-radius:2px;
+    transition:color .2s,border-color .2s,background .2s;
+  }
+  .btn:hover{color:var(--ink); border-color:var(--ink)}
+  .btn[aria-pressed="true"]{color:var(--bg); background:var(--ink); border-color:var(--ink)}
+  :focus-visible{outline:2px solid var(--glacial); outline-offset:3px}
+
+  /* ---------- cover ---------- */
+  .cover{
+    min-height:100vh; min-height:100svh; display:grid; align-content:center;
+    padding:clamp(28px,6vw,80px) clamp(22px,7vw,90px) calc(var(--rail) + 40px);
+    max-width:1100px; margin:0 auto;
+  }
+  .cover .eyebrow{margin-bottom:auto; padding-bottom:min(12vh,90px)}
+  .cover h1{
+    font-family:var(--display); font-weight:800; margin:0;
+    font-size:clamp(42px,10.5vw,124px); line-height:.88; letter-spacing:-.035em;
+  }
+  .cover h1 em{font-style:normal; display:block; color:var(--glacial)}
+  .cover .sub{
+    margin:26px 0 0; max-width:30ch; font-size:clamp(17px,2.2vw,21px);
+    line-height:1.55; color:var(--dim); font-style:italic;
+  }
+  .byline{display:flex; align-items:baseline; gap:14px; margin-top:38px; padding-top:20px; border-top:1px solid var(--rule)}
+  .byline .name{font-family:var(--display); font-weight:600; font-size:22px; letter-spacing:.02em}
+  .begin{
+    margin-top:44px; display:inline-flex; align-items:center; gap:12px;
+    font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    border:1px solid var(--ink); border-radius:2px; padding:14px 20px; align-self:start;
+    transition:background .25s,color .25s;
+  }
+  .begin:hover{background:var(--ink); color:var(--bg)}
+  .begin .arrow{transition:transform .25s}
+  .begin:hover .arrow{transform:translateX(4px)}
+
+  /* ---------- reader ---------- */
+  main{display:none}
+  body[data-view="read"] main{display:block}
+  body[data-view="read"] .cover{display:none}
+  .chapter{
+    max-width:calc(34rem * var(--scale)); margin:0 auto;
+    padding:104px 24px calc(var(--rail) + 96px);
+  }
+  .chead{margin:0 0 clamp(36px,7vh,72px)}
+  .chead .num{display:flex; align-items:center; gap:12px}
+  .chead .num i{flex:1; height:1px; background:var(--rule); display:block}
+  .chead h2{
+    font-family:var(--display); font-weight:600; letter-spacing:-.025em;
+    font-size:calc(clamp(30px,7vw,46px) * var(--scale)); line-height:1.02; margin:18px 0 0;
+  }
+  .stanza{
+    margin:0 0 calc(1.75em * 1); font-size:calc(18.5px * var(--scale));
+    line-height:1.72; letter-spacing:.002em;
+  }
+  .stanza span{display:block}
+  strong{font-weight:600; color:var(--ink)}
+  .quote{
+    margin:calc(2.4em) 0; padding-left:22px; border-left:2px solid var(--glacial);
+    font-size:calc(20px * var(--scale)); line-height:1.62; font-style:italic; color:var(--ink);
+  }
+  .quote span{display:block}
+  .sign{
+    margin:2.4em 0; padding:20px 22px; border:1px solid var(--rule); border-radius:2px;
+    background:var(--bg2);
+  }
+  .sign span{
+    display:block; font-family:var(--mono); font-size:calc(12.5px * var(--scale));
+    letter-spacing:.14em; text-transform:uppercase; color:var(--marigold); line-height:2;
+  }
+  .cfoot{margin-top:clamp(48px,9vh,96px); padding-top:22px; border-top:1px solid var(--rule)}
+  .nextlink{display:block; text-align:left}
+  .nextlink .t{
+    display:block; font-family:var(--display); font-weight:600; font-size:calc(23px * var(--scale));
+    letter-spacing:-.02em; margin-top:8px;
+  }
+  .nextlink:hover .t{color:var(--glacial)}
+  .fin{text-align:center; padding:10px 0 0}
+  .fin p{font-family:var(--body); font-style:italic; color:var(--dim); margin:0 0 22px; font-size:17px}
+
+  .fade{animation:up .55s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes up{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+
+  /* ---------- elevation rail (signature) ---------- */
+  .rail{
+    position:fixed; inset:auto 0 0 0; z-index:35; height:var(--rail);
+    background:linear-gradient(to top,color-mix(in srgb,var(--bg) 94%,transparent),transparent);
+    border-top:1px solid var(--rule);
+    display:flex; align-items:flex-end;
+    transform:translateY(110%); transition:transform .45s ease;
+  }
+  body[data-view="read"] .rail{transform:none}
+  .rail svg{width:100%; height:var(--rail); display:block}
+  .rail .hit{fill:transparent; cursor:pointer}
+  .rail .hit:hover ~ *{}
+  .ridge-fill{fill:var(--shade)}
+  .ridge-line{fill:none; stroke:var(--rule); stroke-width:1.25; vector-effect:non-scaling-stroke}
+  .ridge-done{fill:none; stroke:var(--glacial); stroke-width:1.6; vector-effect:non-scaling-stroke}
+  .peak{fill:var(--bg); stroke:var(--rule); stroke-width:1; vector-effect:non-scaling-stroke}
+  .peak.read{stroke:var(--glacial)}
+  .peak.here{fill:var(--marigold); stroke:var(--marigold)}
+  .youare{fill:var(--marigold)}
+  .peaklabel{font-family:var(--mono); font-size:9px; letter-spacing:.1em; fill:var(--dim)}
+
+  /* ---------- contents ---------- */
+  .sheet{
+    position:fixed; inset:0; z-index:60; background:var(--bg);
+    display:none; overflow:auto; padding:22px 22px 60px;
+  }
+  .sheet.open{display:block; animation:up .35s ease both}
+  .sheet .top{display:flex; align-items:center; justify-content:space-between; gap:16px; max-width:900px; margin:0 auto 34px}
+  .toc{max-width:900px; margin:0 auto; border-top:1px solid var(--rule)}
+  .toc button{
+    display:grid; grid-template-columns:44px 1fr auto; gap:16px; align-items:baseline;
+    width:100%; text-align:left; padding:18px 4px; border-bottom:1px solid var(--rule);
+  }
+  .toc .n{font-family:var(--mono); font-size:12px; color:var(--dim)}
+  .toc .t{font-family:var(--display); font-weight:600; font-size:clamp(20px,3.4vw,27px); letter-spacing:-.02em; line-height:1.15}
+  .toc .m{font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); white-space:nowrap}
+  .toc button:hover .t{color:var(--glacial)}
+  .toc button[aria-current="true"] .n{color:var(--marigold)}
+  .toc button[aria-current="true"] .t{color:var(--marigold)}
+  .bigridge{max-width:900px; margin:0 auto 8px}
+  .bigridge svg{width:100%; height:120px; display:block}
+  .legend{max-width:900px; margin:0 auto 30px; display:flex; gap:18px; flex-wrap:wrap}
+
+  @media (max-width:640px){
+    :root{--rail:58px}
+    .chapter{padding:88px 20px calc(var(--rail) + 72px)}
+    .peaklabel{display:none}
+    .byline{flex-wrap:wrap; gap:8px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important; transition-duration:.01ms !important}
+  }
+</style>
+
+<header>
+  <span class="brand"><b>The Life I Thought I Wanted</b> &nbsp;/&nbsp; <span id="hdrch">Chapter 01</span></span>
+  <span class="spacer"></span>
+  <button class="btn" id="typeBtn" title="Text size">Aa</button>
+  <button class="btn" id="themeBtn" title="Light or dark">Dark</button>
+  <button class="btn" id="tocBtn">Contents</button>
+</header>
+
+<section class="cover">
+  <div class="eyebrow mono">A memoir in twelve chapters &nbsp;·&nbsp; India → Colorado</div>
+  <h1>The Life<br>I Thought<em>I Wanted</em></h1>
+  <p class="sub">I crossed an ocean to build a life, then stood inside that life wondering where home was.</p>
+  <div class="byline">
+    <span class="mono">Written by</span>
+    <span class="name">AJ</span>
+  </div>
+  <button class="begin" id="beginBtn">Begin reading <span class="arrow">→</span></button>
+</section>
+
+<main>
+  <article class="chapter" id="chapter"></article>
+</main>
+
+<div class="rail" id="rail" aria-hidden="true"></div>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Contents">
+  <div class="top">
+    <span class="mono">Contents · twelve chapters</span>
+    <button class="btn" id="closeToc">Close</button>
+  </div>
+  <div class="bigridge" id="bigridge"></div>
+  <div class="legend">
+    <span class="mono">Each peak is a chapter</span>
+    <span class="mono" style="color:var(--marigold)">◆ you are here</span>
+  </div>
+  <nav class="toc" id="toc"></nav>
+</div>
+
+<script>
+const CH = [
+{n:1,title:"Leaving Home",alt:.28,body:`
+When I left India, I thought I knew exactly what I was chasing.
+
+A master's degree.
+A good engineering job.
+Financial independence.
+A life in America.
+A future that felt bigger than the one I could already see.
+
+It all looked simple from far away.
+
+Study hard.
+Work hard.
+Move abroad.
+Build a career.
+Build a life.
+
+I thought success would feel like arrival.
+
+What I didn't understand then was that moving to another country does not simply change your address.
+
+It changes your rhythm.
+It changes your relationships.
+It changes what home means.
+And slowly, quietly, it changes you.
+
+When I first arrived in the United States, everything felt enormous.
+
+The roads.
+The distances.
+The possibilities.
+Even the silence.
+
+I had to learn how to build a life from nothing.
+
+How to find a place to live.
+How to manage money.
+How to drive through unfamiliar cities.
+How to make decisions without having family nearby to ask.
+How to solve problems that back home would have taken one phone call.
+
+At first, that independence felt intoxicating.
+
+For the first time in my life, almost every decision belonged completely to me.
+
+I could drive somewhere at midnight simply because I wanted to.
+I could spend a weekend in the mountains.
+I could change my plans without explaining myself.
+I could live quietly.
+I could live loudly.
+I could choose.
+
+And for a long time, I thought that was what freedom meant.
+
+But eventually I learned that freedom has two faces.
+
+> One looks like independence.
+> The other sometimes looks like an empty room.
+> And from a distance, they can look almost the same.
+`},
+{n:2,title:"Becoming the Person I Once Wanted to Be",alt:.52,body:`
+For years, I imagined getting an engineering job in America as some kind of finish line.
+
+I had studied electronics in India.
+Then I moved across the world for a master's degree.
+I spent long nights learning things that once seemed impossibly complicated.
+
+Embedded systems.
+Software.
+Operating systems.
+Hardware.
+Communication protocols.
+
+All those technical words that once belonged to textbooks slowly became part of my everyday life.
+
+Then one day, almost without realizing it, I was no longer the student asking how systems worked.
+
+I was the engineer responsible for making them work.
+
+That shift meant more to me than I probably said out loud.
+
+There is something deeply satisfying about working on a real product.
+
+Writing code and knowing that somewhere, a physical device is depending on it.
+Debugging something for hours and finally seeing the system behave exactly the way it should.
+
+Connecting hardware.
+Flashing firmware.
+Watching logs.
+Finding the one line of code that caused everything to fail.
+Fixing it.
+Seeing it work.
+
+There is a strange beauty in engineering.
+
+Most people only see the final product.
+They do not see the hours spent staring at something that refuses to work.
+They do not see the frustration.
+The tiny victories.
+The moment when something finally responds.
+
+But I loved that part.
+I loved being close to the actual thing I was building.
+
+And somehow, I also found something rare.
+
+A job that did not consume my entire life.
+
+I did not wake up every morning terrified of work.
+I was not constantly drowning in impossible deadlines.
+
+I had room to think.
+Room to learn.
+Room to have a life after work.
+
+I could close my laptop and still have energy left to become someone outside my job title.
+
+For a while, I thought:
+
+Maybe this is it.
+Maybe I actually did it.
+Maybe this is what all those years of studying were for.
+
+But life has a strange way of letting you reach one dream just before showing you another empty space you never noticed.
+`},
+{n:3,title:"The Mountains",alt:.88,body:`
+Colorado gave me something I never expected.
+
+Mountains.
+
+At first, they were just scenery.
+
+Beautiful shapes sitting on the horizon while I drove somewhere else.
+
+Then one day, I started climbing them.
+
+And something changed.
+
+One summit became another.
+Then another.
+
+Pikes Peak.
+Elbert.
+Princeton.
+Longs Peak.
+Bierstadt.
+Grays.
+Torreys.
+Missouri.
+Quandary.
+
+Names slowly became memories.
+
+Early mornings.
+Cold air.
+Heavy breathing.
+Tired legs.
+Loose rocks.
+Wind cutting across a ridge.
+A sunrise slowly turning the mountains gold.
+
+There was something about hiking that made life incredibly simple.
+
+You wake up before sunrise.
+You stand at a trailhead.
+There is a mountain in front of you.
+
+And the only question that matters is:
+
+Can you keep going?
+
+For a few hours, everything else disappears.
+
+No career anxiety.
+No paperwork.
+No unanswered messages.
+No loneliness.
+No expectations.
+No future.
+
+Just the next step.
+Then another.
+Then another.
+
+There is something honest about a mountain.
+
+It never promises to be easy.
+It never pretends to care.
+It simply stands there.
+
+And if you want the view, you climb.
+
+Sometimes slowly.
+Sometimes confidently.
+Sometimes wondering why the hell you decided to do this.
+
+And sometimes the path disappears.
+
+That happened in more ways than one.
+
+A route that was supposed to be Class 3 suddenly became something far more exposed because we missed the correct line.
+
+There were moments where a small mistake no longer felt funny.
+
+A narrow ledge.
+A hand searching for a hold.
+A glance downward that lasted half a second too long.
+
+Those moments make everything sharp.
+
+Suddenly there is no past.
+No future.
+Only the rock under your hand.
+The next place to put your foot.
+The next breath.
+
+And maybe that is why I kept going back.
+
+Because mountains reduced life to something understandable.
+
+There was a summit.
+There was a route.
+There was effort.
+There was consequence.
+
+And even when the path disappeared, you still had to find a way.
+
+Sometimes I wish life came with trail markers.
+
+A small sign telling you:
+
+# This way.
+# You are still on course.
+# Keep going.
+
+But life rarely does.
+
+Sometimes all you get is fog.
+
+And somehow, you still have to walk.
+`},
+{n:4,title:"Learning to Fight",alt:.72,body:`
+Then came Muay Thai.
+
+At first it was just something new.
+Something physical.
+Something interesting.
+Maybe something to break the routine.
+
+But very quickly, it became something more.
+
+There is a very specific kind of anxiety that comes from knowing you are going to spar later.
+
+Hours before class, your mind begins negotiating with you.
+
+Maybe skip today.
+Maybe your body needs rest.
+Maybe you can go tomorrow.
+Maybe there will be people much better than you.
+Maybe you will look terrible.
+
+And sometimes the hardest fight happens before you even enter the gym.
+
+Then you walk through the door.
+You wrap your hands.
+You put on your gloves.
+The bell rings.
+
+And somehow the anxiety becomes movement.
+
+Jab.
+Cross.
+Kick.
+Block.
+Move.
+Breathe.
+
+Getting hit teaches you strange things.
+
+You learn that pain is often less frightening than anticipation.
+You learn that confidence can disappear in half a second.
+You learn that fear and excitement can exist in the same heartbeat.
+You learn that sometimes courage is not feeling fearless.
+
+Sometimes courage is feeling nervous all afternoon and still showing up at night.
+
+There were days I felt terrible.
+
+Rounds where my mind went completely blank.
+Combinations I knew during drills disappeared the moment someone started hitting back.
+
+There were people faster than me.
+Taller than me.
+More experienced than me.
+People whose movement made mine feel slow and obvious.
+
+And then, once in a while, something clicked.
+
+A counter landed perfectly.
+A combination happened without conscious thought.
+A movement that once required effort suddenly became instinct.
+
+And for a second, I saw proof that I was changing.
+
+Not dramatically.
+Not overnight.
+But little by little.
+
+I got injured.
+I recovered.
+I came back.
+I got frustrated.
+I came back.
+I felt intimidated.
+I came back.
+
+Maybe there is a pattern there.
+
+> Some days you win.
+> Some days you ache.
+> Some days you're strong.
+> Some days you break.
+> But the bell rings again,
+> and somehow,
+> you wake.
+
+Muay Thai became more than a sport.
+
+It became another place where I was learning what kind of person I was when things became uncomfortable.
+
+And maybe more importantly, it became a place where people slowly started knowing my name.
+
+That sounds small.
+
+It wasn't.
+
+When you live far away from family, small places of belonging become enormous.
+`},
+{n:5,title:"The Quiet Parts",alt:.2,body:`
+The hardest moments of my life in America were rarely dramatic.
+
+There was no single catastrophic event.
+No movie scene.
+No explosion.
+
+Mostly, there was silence.
+
+Coming home after work.
+Opening the door.
+Making food.
+Sitting down.
+Looking at my phone.
+Maybe going to the gym.
+Maybe watching something.
+Maybe calling home.
+Then going to sleep.
+
+The next morning, starting again.
+
+There are days when independence feels like power.
+
+And there are nights when independence feels like nobody would notice whether you came home at all.
+
+That is difficult to explain to people.
+
+Because from the outside, everything looked good.
+
+Good education.
+Good career.
+Good salary.
+A car.
+Trips.
+Mountains.
+Activities.
+Freedom.
+Pictures from hikes.
+Pictures from events.
+A life that looked full.
+
+But sometimes a life can be full of activities and still feel empty of connection.
+
+You can know many people and still feel unknown.
+You can talk all day and still feel unheard.
+You can be surrounded by voices
+and still come home to silence.
+
+There is a loneliness that comes from being physically alone.
+
+But there is another kind that hurts differently.
+
+The loneliness of having things to say and not knowing who to say them to.
+The loneliness of experiencing something beautiful and realizing the person you most want beside you is thousands of miles away.
+The loneliness of slowly becoming someone your family does not fully get to witness becoming.
+
+And that is the strange price of building a life far from home.
+
+You grow.
+
+But the people who love you often see that growth through a screen.
+
+A phone call.
+A photo.
+A few minutes between time zones.
+
+Life continues on both sides of the world.
+
+And somewhere in between, you learn to live with the fact that you are always missing something.
+
+> When I am here,
+> I miss there.
+> If I go there,
+> will I miss here?
+> Two homes.
+> Two fears.
+> Two versions of me.
+> And nowhere that contains them all.
+`},
+{n:6,title:"Love, Loss, and the Things That Stay",alt:.12,body:`
+There was love too.
+
+And like most real love, it was complicated.
+
+Relationships are easy to understand from the outside.
+
+Stay together.
+Break up.
+Move on.
+
+But when you are inside one, nothing feels that clean.
+
+There were moments of closeness.
+There were misunderstandings.
+There were things I needed but didn't always know how to ask for.
+There were things she needed that I did not always understand.
+There were moments when I felt like I was giving more.
+And moments when perhaps she felt exactly the same.
+
+Sometimes two people can care about each other deeply and still slowly hurt each other in ways neither intended.
+
+That is one of the hardest truths to accept.
+
+Because it would almost be easier if someone were clearly wrong.
+If someone were cruel.
+If someone stopped caring.
+
+But sometimes the problem is simply that love does not automatically teach two people how to meet each other's needs.
+
+Eventually, the relationship ended.
+
+But endings are strange.
+
+A relationship can end on a particular day.
+Your feelings rarely do.
+
+Sometimes the person leaves your life before they leave your mind.
+
+You remember small things.
+Tiny moments that should not matter anymore.
+
+A conversation.
+A laugh.
+A certain place.
+A certain song.
+
+And then the questions begin.
+
+Could I have been more patient?
+Did I expect too much?
+Did I understand enough?
+Was leaving the right choice?
+Would trying again change anything?
+Or would we simply walk the same road twice and be surprised when it leads to the same ending?
+
+There are questions life does not answer.
+
+It just teaches you how to carry them.
+
+> Some people become memories.
+> Some memories become lessons.
+> Some lessons become scars.
+> And some scars become part of the shape of who you are.
+`},
+{n:7,title:"Uncertainty",alt:.3,body:`
+For a long time, I thought my future would unfold in a predictable way.
+
+Not easily.
+Not perfectly.
+But predictably.
+
+Build experience.
+Keep growing.
+Keep moving forward.
+Eventually, things would settle.
+
+That is what I believed.
+
+But adulthood has taught me that certainty is often temporary.
+
+Sometimes the things you assume will work out simply remain unresolved.
+Sometimes the plans that felt solid become questions.
+Sometimes the future that once looked obvious starts to blur.
+
+And there is something uniquely difficult about uncertainty when you have already invested years into a direction.
+
+Because then the question is no longer just:
+
+**What happens next?**
+
+It becomes:
+
+**Do I even still want what I once thought I wanted?**
+
+That question is harder.
+
+Because uncertainty outside you is one thing.
+Uncertainty inside you is another.
+
+It is easier to fight an obstacle than to question the destination itself.
+
+For years, the plan gave me comfort.
+
+Now I am learning how to live without needing every next step to be defined.
+
+And perhaps that is its own kind of growing up.
+
+Not having the map.
+Not knowing the ending.
+And still continuing.
+`},
+{n:8,title:"America",alt:.56,body:`
+There are things about America I genuinely love.
+
+I love the independence.
+I love having control over my time.
+I love getting into my car and driving toward the mountains simply because I feel like it.
+I love building my own routines.
+I love that my life belongs mostly to me.
+I love the professional environment I found.
+I love the space.
+The quiet.
+The sense that I can reinvent myself without everyone remembering who I used to be.
+
+America gave me room.
+
+Room to grow.
+Room to fail.
+Room to become someone new.
+
+But room can become distance.
+And silence can become loneliness.
+And independence can become isolation.
+
+For a long time, I thought freedom meant needing nobody.
+
+Now I think maybe freedom means being able to choose the people you want to need.
+
+That difference took me years to understand.
+
+There are evenings here when I feel incredibly fortunate.
+
+Driving through Colorado while the mountains glow in the distance.
+Finishing a good day at work.
+Walking out of Muay Thai exhausted and happy.
+Planning another hike.
+Booking another trip.
+
+Knowing that this entire life exists because I once took a huge risk and left home.
+
+And then there are other nights.
+
+Quiet ones.
+
+The kind where the apartment feels too still.
+Where family feels impossibly far away.
+Where you wonder how many more birthdays, festivals, weddings, ordinary dinners, and random conversations you are willing to miss.
+
+Those are the nights when America feels very large.
+
+And I feel very small inside it.
+
+America gave me freedom.
+
+But lately I have started asking whether freedom alone is enough.
+`},
+{n:9,title:"India",alt:.4,body:`
+Going back to India should feel simple.
+
+It is home.
+
+The streets are familiar.
+The food is familiar.
+The language is familiar.
+The chaos is familiar.
+
+My family is there.
+
+A kind of human closeness exists there naturally that I sometimes have to work very hard to find here.
+
+There are people around.
+There is noise.
+There are conversations happening without planning them three weeks in advance.
+There is life spilling into life.
+
+And yet going back scares me.
+
+Because I am no longer the person who left.
+
+I have spent years making decisions alone.
+
+I am used to my independence.
+My routines.
+My privacy.
+My work culture.
+My space.
+
+Could I adjust again?
+Would I struggle with hierarchy?
+Would I hate the work environment?
+Would I find the same kind of engineering work I enjoy now?
+Would I feel trapped?
+Would I miss the quiet I currently complain about?
+Would I miss the mountains?
+Would I miss driving alone?
+Would I miss America once America was gone?
+
+That is the cruel joke of living abroad for long enough.
+
+You leave home searching for another life.
+
+Then one day you realize you have built two homes.
+
+And neither one contains your whole heart.
+
+> India holds the people I miss.
+> America holds the person I became.
+> And somewhere between them,
+> I stand,
+> asking which loss I am more willing to live with.
+`},
+{n:10,title:"Somewhere Else",alt:.48,body:`
+Then there is the possibility of somewhere else.
+
+Another country.
+Another city.
+Another chapter.
+
+A chance to keep growing professionally while building a different kind of life.
+
+Maybe a different rhythm.
+Maybe better balance.
+Maybe a new culture.
+Maybe another beginning.
+
+There is something exciting about it.
+
+And something exhausting.
+
+Because starting over is romantic only when you're imagining it.
+
+The reality means learning another city.
+Another system.
+Another culture.
+Another social circle.
+Another definition of home.
+
+Again.
+
+Would somewhere else solve the things I am questioning now?
+
+Maybe some of them.
+Maybe it would bring new energy.
+Maybe it would open doors I cannot see yet.
+Maybe it would be an incredible experience.
+
+But a new place would not automatically create belonging.
+
+It would still require building a life from scratch.
+
+And I know now how much that costs emotionally.
+
+Sometimes the world feels enormous because there are so many places I could live.
+
+Sometimes it feels exhausting for exactly the same reason.
+
+So many doors.
+
+So little certainty about which one leads home.
+`},
+{n:11,title:"The Strange Success of My Twenties",alt:.66,body:`
+When I was younger, I thought adulthood meant certainty.
+
+I thought by twenty-six I would understand what I wanted.
+
+Adults seemed so sure when I was a kid.
+
+They went to work.
+Paid bills.
+Made decisions.
+Bought houses.
+Raised families.
+
+They looked like people who had been given some instruction manual I had not read yet.
+
+Then I became an adult.
+
+And discovered everyone is improvising.
+
+The decisions simply become more expensive.
+More permanent.
+And harder to undo.
+
+Still, when I look backward, there are moments where I barely recognize the younger version of myself.
+
+The person who once dreamed about studying in America eventually moved there.
+The engineering student became an engineer.
+The person who had never lived alone learned how.
+The person who saw mountains in photographs eventually stood on top of them.
+The person who had never fought walked into a Muay Thai gym and learned how to take a punch.
+The person afraid of uncertainty somehow built an entire life inside it.
+
+There have been successes.
+Failures.
+Injuries.
+Breakups.
+Promotions.
+Lonely nights.
+Beautiful mornings.
+Moments where I thought I had everything figured out.
+And moments where everything suddenly stopped making sense.
+
+Maybe that is what growing up actually is.
+
+Not slowly finding all the answers.
+
+But slowly becoming comfortable with the fact that some questions follow you for years.
+`},
+{n:12,title:"Twenty-Six",alt:.58,body:`
+I am twenty-six.
+
+Young enough that everyone tells me I have time.
+Old enough that every decision feels like it might shape the rest of my life.
+
+Sometimes I feel ahead.
+Sometimes I feel completely lost.
+Sometimes both in the same day.
+
+I have built more than I once thought possible.
+
+I moved across the world.
+I earned a master's degree.
+I built a career.
+I became independent.
+I climbed mountains.
+I learned to fight.
+I loved someone.
+I lost someone.
+I got hurt.
+I recovered.
+I found confidence.
+I lost it.
+I found it again.
+I made friends.
+I felt lonely.
+I built a home.
+I questioned whether it was home.
+
+And now I am standing at another crossroads.
+
+Stay.
+Go.
+Start again.
+Hold on.
+
+There is no dramatic answer waiting at the end of this chapter.
+
+No perfect conclusion.
+No inspirational sentence that suddenly makes everything simple.
+
+I genuinely do not know where I will live ten years from now.
+I do not know what country I will call home.
+I do not know what company I will work for.
+I do not know who will be sitting beside me at dinner.
+I do not know which mountains I will climb next.
+
+And perhaps, for once, I do not need to know.
+
+For most of my life, I treated everything like an engineering problem.
+
+Find the requirements.
+Understand the constraints.
+Build the solution.
+Test it.
+Fix the errors.
+Reach the result.
+
+But life refuses to behave like code.
+
+The requirements change.
+The inputs are unpredictable.
+The system fails even when you do everything correctly.
+
+And sometimes, halfway through building the solution, you realize you no longer want the outcome you originally designed it for.
+
+Maybe that is where I am now.
+
+Not lost.
+
+Just between versions of myself.
+
+The person who left India knew exactly what he wanted.
+The person writing this no longer does.
+
+And maybe that is not failure.
+
+Maybe that is growth.
+
+Because perhaps growing up is not becoming more certain.
+
+Perhaps it is becoming brave enough to question the certainty you once had.
+
+I came to America chasing freedom.
+I found it.
+Then I discovered that freedom without connection can feel like distance.
+
+I left India chasing opportunity.
+I found it.
+Then I discovered that opportunity sometimes asks you what you are willing to leave behind.
+
+I climbed mountains looking for summits.
+I found them.
+Then I learned every summit eventually asks you to come back down.
+
+I learned to fight because I wanted to become stronger.
+
+And somewhere along the way I learned that strength is not always throwing the next punch.
+
+Sometimes strength is admitting:
+
+**I don't know what comes next.**
+
+There is a strange poetry in that.
+
+I crossed oceans to build a life,
+then stood inside that life wondering where home was.
+
+I chased a future with everything I had,
+only to reach it and ask whether it still belonged to me.
+
+I learned to climb,
+learned to fight,
+learned to fall,
+learned to rise.
+
+And now perhaps I have one more thing to learn:
+
+how to choose.
+
+Not the safest life.
+Not the most impressive life.
+Not the life that looks successful from the outside.
+
+But the one that feels alive when nobody else is watching.
+
+Maybe one day I'll look back at this moment and understand exactly why everything happened the way it did.
+
+Maybe I will stay.
+Maybe I will go somewhere completely unexpected.
+Maybe I will return to India and rediscover a version of home I thought I had outgrown.
+
+I don't know.
+
+But I know this much.
+
+The boy who once dreamed about leaving home eventually did.
+
+He crossed an ocean.
+He built something.
+He became someone.
+
+And now the man he became has earned the right to ask a different question.
+
+Not:
+
+> **How do I hold on to the life I worked so hard to build?**
+
+But:
+
+> **What life is actually worth holding on to?**
+
+And perhaps that is where my story really begins.
+
+Not when I left India.
+Not when I came to America.
+Not when I became an engineer.
+Not when I climbed my first mountain.
+Not when I stepped into a ring.
+Not when a relationship ended.
+
+But here.
+
+At twenty-six.
+
+Standing between countries,
+between certainty and uncertainty,
+between the person I was
+and the person I have not met yet.
+
+Still afraid.
+Still hopeful.
+Still moving.
+
+Because maybe life was never asking me to find one permanent destination.
+
+Maybe it was only asking me to keep becoming someone capable of choosing the next one.
+`}
+];
+
+/* ---------- state ---------- */
+const SCALES=[.92,1,1.12,1.26], SNAMES=["S","M","L","XL"];
+let st={ch:0,theme:"dark",scale:1,started:false};
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,"0");
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+async function load(){
+  try{const r=await window.storage.get("reader-state");if(r)st={...st,...JSON.parse(r.value)};}catch(e){}
+  applyTheme();applyScale();
+  if(st.started)openChapter(st.ch,false);
+  buildToc();drawRail();
+}
+async function save(){
+  try{await window.storage.set("reader-state",JSON.stringify(st));}catch(e){}
+}
+
+/* ---------- rendering ---------- */
+function words(t){return t.trim().split(/\s+/).length}
+function fmt(body){
+  return body.trim().split(/\n{2,}/).map(block=>{
+    const raw=block.split("\n");
+    if(raw[0].startsWith("> ")){
+      return `<blockquote class="quote">${raw.map(l=>`<span>${inline(l.replace(/^>\s?/,""))}</span>`).join("")}</blockquote>`;
+    }
+    if(raw[0].startsWith("# ")){
+      return `<div class="sign">${raw.map(l=>`<span>${inline(l.replace(/^#\s?/,""))}</span>`).join("")}</div>`;
+    }
+    return `<p class="stanza">${raw.map(l=>`<span>${inline(l)}</span>`).join("")}</p>`;
+  }).join("");
+}
+function inline(l){return esc(l).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>")}
+
+function openChapter(i,scroll=true){
+  st.ch=Math.max(0,Math.min(CH.length-1,i));st.started=true;
+  const c=CH[st.ch], mins=Math.max(1,Math.round(words(c.body)/210));
+  const next=CH[st.ch+1];
+  $("chapter").innerHTML=`
+    <div class="chead">
+      <div class="num"><span class="mono">Chapter ${pad(c.n)}</span><i></i><span class="mono">${mins} min read</span></div>
+      <h2>${esc(c.title)}</h2>
+    </div>
+    ${fmt(c.body)}
+    <div class="cfoot">${ next
+      ? `<button class="nextlink" onclick="openChapter(${st.ch+1})"><span class="mono">Next chapter · ${pad(next.n)}</span><span class="t">${esc(next.title)} →</span></button>`
+      : `<div class="fin"><p>End of book. Thank you for reading.</p><button class="btn" onclick="showToc()">Back to contents</button></div>`}</div>`;
+  $("chapter").classList.remove("fade");void $("chapter").offsetWidth;$("chapter").classList.add("fade");
+  document.body.dataset.view="read";
+  $("hdrch").textContent=`Chapter ${pad(c.n)} — ${c.title}`;
+  if(scroll)window.scrollTo({top:0,behavior:"instant"});
+  buildToc();drawRail();save();
+}
+window.openChapter=openChapter;
+
+/* ---------- elevation ridge (nav + progress) ---------- */
+const W=1000,H=110,TOP=16,BASE=H-8,PADX=26;
+const px=i=>PADX+i*((W-PADX*2)/(CH.length-1));
+const py=a=>BASE-a*(BASE-TOP);
+function ridge(){
+  let d=`M0,${BASE} L${px(0)},${py(CH[0].alt)}`;
+  for(let i=1;i<CH.length;i++){
+    const mid=(px(i-1)+px(i))/2, low=Math.min(CH[i-1].alt,CH[i].alt)*0.5;
+    d+=` L${mid.toFixed(1)},${py(low).toFixed(1)} L${px(i).toFixed(1)},${py(CH[i].alt).toFixed(1)}`;
+  }
+  return d+` L${W},${BASE}`;
+}
+function progress(){
+  const el=document.documentElement;
+  const within=st.started?Math.min(1,Math.max(0,(window.scrollY)/Math.max(1,el.scrollHeight-window.innerHeight-40))):0;
+  return (st.ch+within)/CH.length;
+}
+function svgMarkup(big){
+  const d=ridge();
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="ridge-fill" d="${d} L0,${BASE} Z"/>
+    <path class="ridge-line" d="${d}"/>
+    <path class="ridge-done" id="${big?'bigdone':'done'}" d="${d}"/>
+    ${CH.map((c,i)=>`<circle class="peak ${i<st.ch?'read':''} ${i===st.ch&&st.started?'here':''}" cx="${px(i).toFixed(1)}" cy="${py(c.alt).toFixed(1)}" r="${i===st.ch&&st.started?4:3}"/>`).join("")}
+    ${big?CH.map((c,i)=>`<text class="peaklabel" x="${px(i).toFixed(1)}" y="${(py(c.alt)-10).toFixed(1)}" text-anchor="middle">${pad(c.n)}</text>`).join(""):""}
+    ${CH.map((c,i)=>`<rect class="hit" x="${(px(i)-38).toFixed(1)}" y="0" width="76" height="${H}" data-go="${i}"><title>${pad(c.n)} · ${c.title}</title></rect>`).join("")}
+  </svg>`;
+}
+function drawRail(){
+  $("rail").innerHTML=svgMarkup(false);
+  $("bigridge").innerHTML=svgMarkup(true);
+  [$("rail"),$("bigridge")].forEach(host=>host.querySelectorAll("[data-go]").forEach(r=>
+    r.addEventListener("click",()=>{closeToc();openChapter(+r.dataset.go)})));
+  paint();
+}
+function paint(){
+  const p=progress();
+  ["done","bigdone"].forEach(id=>{
+    const path=$(id);if(!path)return;
+    const L=path.getTotalLength();
+    path.style.strokeDasharray=L;
+    path.style.strokeDashoffset=L*(1-p);
+  });
+}
+window.addEventListener("scroll",paint,{passive:true});
+window.addEventListener("resize",paint);
+
+/* ---------- contents ---------- */
+function buildToc(){
+  $("toc").innerHTML=CH.map((c,i)=>`
+    <button ${i===st.ch&&st.started?'aria-current="true"':''} onclick="closeToc();openChapter(${i})">
+      <span class="n">${pad(c.n)}</span>
+      <span class="t">${esc(c.title)}</span>
+      <span class="m">${Math.max(1,Math.round(words(c.body)/210))} min</span>
+    </button>`).join("");
+}
+function showToc(){$("sheet").classList.add("open");document.body.style.overflow="hidden";$("closeToc").focus()}
+function closeToc(){$("sheet").classList.remove("open");document.body.style.overflow=""}
+window.showToc=showToc;window.closeToc=closeToc;
+
+/* ---------- controls ---------- */
+function applyTheme(){
+  document.documentElement.dataset.theme=st.theme==="snow"?"snow":"";
+  $("themeBtn").textContent=st.theme==="snow"?"Light":"Dark";
+}
+function applyScale(){
+  document.documentElement.style.setProperty("--scale",SCALES[st.scale]);
+  $("typeBtn").textContent="Aa "+SNAMES[st.scale];
+}
+$("themeBtn").onclick=()=>{st.theme=st.theme==="snow"?"dark":"snow";applyTheme();save()};
+$("typeBtn").onclick=()=>{st.scale=(st.scale+1)%SCALES.length;applyScale();save();paint()};
+$("tocBtn").onclick=showToc;
+$("closeToc").onclick=closeToc;
+$("beginBtn").onclick=()=>openChapter(st.ch||0);
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape")closeToc();
+  if(!st.started)return;
+  if(e.key==="ArrowRight"&&st.ch<CH.length-1)openChapter(st.ch+1);
+  if(e.key==="ArrowLeft"&&st.ch>0)openChapter(st.ch-1);
+  if(e.key.toLowerCase()==="c")showToc();
+});
+load();
+</script>
