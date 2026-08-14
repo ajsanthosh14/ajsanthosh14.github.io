@@ -114,6 +114,25 @@
   .peaks li{font-family:var(--body);font-weight:500;font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:8px 15px;transition:background .2s,transform .2s}
   .peaks li:hover{background:var(--mint);transform:translateY(-2px)}
 
+  /* hiking stats */
+  .fourteener-card{background:var(--lav);border-radius:26px;padding:26px;margin:0 0 14px}
+  .fourteener-card .cap,.hike-stat .cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(36,29,46,.6)}
+  .fourteener-main{display:flex;align-items:baseline;margin-top:18px}
+  .fourteener-main .num{font-family:var(--display);font-size:clamp(48px,7vw,68px);font-weight:700;line-height:.9}
+  .fourteener-main .of{font-family:var(--mono);font-size:18px;margin-left:7px;opacity:.55}
+  .fourteener-card .unit{display:block;margin-top:8px;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+  .progress-track{height:8px;margin-top:24px;border-radius:999px;background:rgba(36,29,46,.1);overflow:hidden}
+  .progress-fill{height:100%;width:24.1%;border-radius:inherit;background:var(--ink)}
+  .progress-label{display:block;margin-top:9px;font-family:var(--mono);font-size:10px;opacity:.55}
+  .hike-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 26px}
+  .hike-stat{min-height:140px;border-radius:24px;padding:21px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+  .hike-stat:hover{transform:translateY(-5px) rotate(-.5deg);box-shadow:0 16px 40px rgba(36,29,46,.08)}
+  .hike-stat .cap{margin-bottom:auto}
+  .hike-stat .num{font-family:var(--display);font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-.03em;line-height:1}
+  .hike-stat .unit{margin-top:7px;font-family:var(--mono);font-size:10px;text-transform:uppercase;opacity:.55}
+  .peak-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);display:block;margin:4px 0 12px}
+  @media(max-width:700px){.hike-stats{grid-template-columns:1fr}.hike-stat{min-height:120px}}
+
   /* story */
   .story{display:block;background:var(--grad);border-radius:26px;padding:clamp(26px,4.4vw,46px);color:var(--ink);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
   .story:hover{transform:translateY(-6px)}
@@ -333,7 +352,35 @@
 <section id="life">
   <div class="wrap">
     <span class="eyebrow rv">⛰️ off the clock</span>
-    <h2 class="rv">Fourteen summits<br>and a heavy bag.</h2>
+    <h2 class="rv">Trails, summits<br>&amp; a heavy bag.</h2>
+
+    <div class="fourteener-card rv">
+      <span class="cap">Colorado 14ers</span>
+      <div class="fourteener-main"><span class="num">14</span><span class="of">/ 58</span></div>
+      <span class="unit">summited</span>
+      <div class="progress-track"><div class="progress-fill"></div></div>
+      <span class="progress-label">24% complete · and counting</span>
+    </div>
+
+    <div class="hike-stats rv">
+      <div class="hike-stat t-mint">
+        <span class="cap">Miles hiked</span>
+        <span class="num">248.7</span>
+        <span class="unit">mi</span>
+      </div>
+      <div class="hike-stat t-sky">
+        <span class="cap">Elevation gained</span>
+        <span class="num">78,806</span>
+        <span class="unit">ft</span>
+      </div>
+      <div class="hike-stat t-peach">
+        <span class="cap">Hikes completed</span>
+        <span class="num">38</span>
+        <span class="unit">trails</span>
+      </div>
+    </div>
+
+    <span class="peak-label rv">14ers summited</span>
     <ul class="peaks rv">
       <li>Pikes Peak</li><li>Mt. Elbert</li><li>Longs Peak</li><li>Mt. Princeton</li><li>Mt. Lincoln</li><li>Mt. Cameron</li><li>Mt. Bross</li><li>Mt. Democrat</li><li>Missouri Mountain</li><li>Mt. Bierstadt</li><li>Mt. Blue Sky</li><li>Grays Peak</li><li>Torreys Peak</li><li>Quandary Peak</li>
     </ul>
