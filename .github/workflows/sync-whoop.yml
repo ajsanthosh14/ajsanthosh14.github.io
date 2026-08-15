@@ -1,0 +1,85 @@
+name: Sync WHOOP dashboard
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */2 * * *'
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/sync-whoop.yml'
+      - 'scripts/install_whoop_dashboard.py'
+      - 'scripts/update_whoop_dashboard.py'
+      - 'assets/js/whoop-dashboard.js'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: whoop-dashboard-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.actor != 'github-actions[bot]' || github.event_name != 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+
+      - name: Install WHOOP dashboard markup
+        run: python scripts/install_whoop_dashboard.py
+
+      - name: Refresh WHOOP access token
+        id: whoop_auth
+        env:
+          WHOOP_CLIENT_ID: ${{ secrets.WHOOP_CLIENT_ID }}
+          WHOOP_CLIENT_SECRET: ${{ secrets.WHOOP_CLIENT_SECRET }}
+          WHOOP_REFRESH_TOKEN: ${{ secrets.WHOOP_REFRESH_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          response=$(curl --fail-with-body --silent --show-error \
+            --request POST 'https://api.prod.whoop.com/oauth/oauth2/token' \
+            --header 'Content-Type: application/x-www-form-urlencoded' \
+            --data-urlencode 'grant_type=refresh_token' \
+            --data-urlencode "refresh_token=${WHOOP_REFRESH_TOKEN}" \
+            --data-urlencode "client_id=${WHOOP_CLIENT_ID}" \
+            --data-urlencode "client_secret=${WHOOP_CLIENT_SECRET}")
+
+          access_token=$(RESPONSE="$response" python -c "import json,os; print(json.loads(os.environ['RESPONSE'])['access_token'])")
+          refresh_token=$(RESPONSE="$response" python -c "import json,os; print(json.loads(os.environ['RESPONSE'])['refresh_token'])")
+
+          echo "::add-mask::$access_token"
+          echo "::add-mask::$refresh_token"
+          echo "access_token=$access_token" >> "$GITHUB_OUTPUT"
+          echo "refresh_token=$refresh_token" >> "$GITHUB_OUTPUT"
+
+      - name: Store rotated WHOOP refresh token
+        env:
+          GH_TOKEN: ${{ secrets.WHOOP_SECRET_UPDATE_TOKEN }}
+          NEW_REFRESH_TOKEN: ${{ steps.whoop_auth.outputs.refresh_token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh secret set WHOOP_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" --body "$NEW_REFRESH_TOKEN"
+
+      - name: Build weekly WHOOP data
+        env:
+          WHOOP_ACCESS_TOKEN: ${{ steps.whoop_auth.outputs.access_token }}
+        run: python scripts/update_whoop_dashboard.py
+
+      - name: Publish dashboard changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html assets/data/whoop-week.json
+          if git diff --cached --quiet; then
+            echo 'No dashboard changes to publish.'
+            exit 0
+          fi
+          git commit -m 'Update WHOOP training dashboard'
+          git push
