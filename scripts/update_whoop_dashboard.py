@@ -108,17 +108,36 @@ def main() -> None:
         for sport, count in sorted(sports.items(), key=lambda item: (-item[1], item[0]))
     ]
 
-    data = {
+    core = {
         "source": "WHOOP",
         "timezone": "America/Denver",
         "week_start": week_start_local.date().isoformat(),
-        "updated_at": end_utc.isoformat().replace("+00:00", "Z"),
         "workouts": len(workouts),
         "training_seconds": round(total_seconds),
         "training_time": format_duration(total_seconds),
         "average_strain": round(sum(strains) / len(strains), 1) if strains else None,
         "peak_hr": max(peak_hrs) if peak_hrs else None,
         "activities": activities,
+    }
+
+    previous = None
+    if OUT_PATH.exists():
+        try:
+            previous = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            pass
+
+    comparable_previous = None
+    if isinstance(previous, dict):
+        comparable_previous = {k: previous.get(k) for k in core}
+
+    if comparable_previous == core:
+        print("WHOOP dashboard data unchanged; keeping existing file.")
+        return
+
+    data = {
+        **core,
+        "updated_at": end_utc.isoformat().replace("+00:00", "Z"),
     }
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
