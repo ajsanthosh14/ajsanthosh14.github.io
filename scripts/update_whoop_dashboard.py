@@ -38,7 +38,14 @@ def format_duration(seconds: float) -> str:
 
 
 def fetch_json(url: str, access_token: str) -> dict:
-    req = Request(url, headers={"Authorization": f"Bearer {access_token}"})
+    req = Request(
+        url,
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Accept": "application/json",
+            "User-Agent": "SanthoshPortfolio-WHOOP/1.0",
+        },
+    )
     with urlopen(req, timeout=30) as response:
         return json.load(response)
 
