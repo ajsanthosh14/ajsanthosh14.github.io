@@ -1,0 +1,25 @@
+{
+  "source": "WHOOP",
+  "timezone": "America/Denver",
+  "week_start": "2026-08-10",
+  "workouts": 4,
+  "training_seconds": 16509,
+  "training_time": "4h 35m",
+  "average_strain": 11.7,
+  "peak_hr": 196,
+  "activities": [
+    {
+      "sport": "Weightlifting",
+      "count": 2
+    },
+    {
+      "sport": "Martial Arts",
+      "count": 1
+    },
+    {
+      "sport": "Muay Thai",
+      "count": 1
+    }
+  ],
+  "updated_at": "2026-08-15T04:27:00Z"
+}
