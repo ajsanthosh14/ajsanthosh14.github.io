@@ -28,18 +28,28 @@
       set('whoop-strain',strain==null?'—':strain.toFixed(1));
       set('whoop-peak',d.peak_hr==null?'—':d.peak_hr);
 
-      var fill=document.getElementById('whoop-strain-fill');
-      if(fill){
-        var pct=strain==null?0:Math.max(0,Math.min(100,(strain/21)*100));
-        fill.style.width=pct+'%';
+      var ring=document.getElementById('whoop-strain-ring');
+      if(ring){
+        var circumference=452.39;
+        var ratio=strain==null?0:Math.max(0,Math.min(1,strain/21));
+        ring.style.strokeDasharray=circumference;
+        ring.style.strokeDashoffset=(circumference*(1-ratio)).toFixed(2);
       }
 
       var activities=document.getElementById('whoop-activities');
       if(activities){
-        var names=(d.activities||[]).map(function(a){
-          return (sportIcons[a.sport]||'•')+' '+a.sport;
-        });
-        activities.textContent=names.length?names.join('  ·  '):'No training recorded yet this week';
+        activities.innerHTML='';
+        var list=d.activities||[];
+        if(!list.length){
+          activities.textContent='No training recorded yet this week';
+        }else{
+          list.forEach(function(a){
+            var chip=document.createElement('span');
+            chip.className='whoop-live-chip';
+            chip.textContent=(sportIcons[a.sport]||'•')+' '+a.sport;
+            activities.appendChild(chip);
+          });
+        }
       }
 
       var updated=document.getElementById('whoop-updated');
