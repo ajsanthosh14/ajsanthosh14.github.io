@@ -2,10 +2,10 @@
   "source": "WHOOP",
   "timezone": "America/Denver",
   "week_start": "2026-08-10",
-  "workouts": 4,
-  "training_seconds": 16509,
-  "training_time": "4h 35m",
-  "average_strain": 11.7,
+  "workouts": 5,
+  "training_seconds": 17468,
+  "training_time": "4h 51m",
+  "average_strain": 10.2,
   "peak_hr": 196,
   "activities": [
     {
@@ -19,7 +19,11 @@
     {
       "sport": "Muay Thai",
       "count": 1
+    },
+    {
+      "sport": "Spin",
+      "count": 1
     }
   ],
-  "updated_at": "2026-08-15T04:27:00Z"
+  "updated_at": "2026-08-16T16:41:07.548977Z"
 }
