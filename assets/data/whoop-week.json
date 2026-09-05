@@ -2,11 +2,16 @@
   "source": "WHOOP",
   "timezone": "America/Denver",
   "week_start": "2026-08-31",
-  "workouts": 0,
-  "training_seconds": 0,
-  "training_time": "0m",
-  "average_strain": null,
-  "peak_hr": null,
-  "activities": [],
-  "updated_at": "2026-08-31T13:47:37.736605Z"
+  "workouts": 1,
+  "training_seconds": 779,
+  "training_time": "13m",
+  "average_strain": 2.8,
+  "peak_hr": 117,
+  "activities": [
+    {
+      "sport": "Hiking Rucking",
+      "count": 1
+    }
+  ],
+  "updated_at": "2026-09-05T23:53:39.675706Z"
 }
