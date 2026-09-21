@@ -1,21 +1,12 @@
 {
   "source": "WHOOP",
   "timezone": "America/Denver",
-  "week_start": "2026-09-14",
-  "workouts": 5,
-  "training_seconds": 20858,
-  "training_time": "5h 48m",
-  "average_strain": 13.0,
-  "peak_hr": 199,
-  "activities": [
-    {
-      "sport": "Weightlifting",
-      "count": 3
-    },
-    {
-      "sport": "Martial Arts",
-      "count": 2
-    }
-  ],
-  "updated_at": "2026-09-20T04:52:46.938138Z"
+  "week_start": "2026-09-21",
+  "workouts": 0,
+  "training_seconds": 0,
+  "training_time": "0m",
+  "average_strain": null,
+  "peak_hr": null,
+  "activities": [],
+  "updated_at": "2026-09-21T12:46:22.767716Z"
 }
