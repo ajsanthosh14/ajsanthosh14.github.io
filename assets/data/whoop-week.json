@@ -1,12 +1,12 @@
 {
   "source": "WHOOP",
   "timezone": "America/Denver",
-  "week_start": "2026-09-21",
+  "week_start": "2026-09-28",
   "workouts": 0,
   "training_seconds": 0,
   "training_time": "0m",
   "average_strain": null,
   "peak_hr": null,
   "activities": [],
-  "updated_at": "2026-09-21T12:46:22.767716Z"
+  "updated_at": "2026-09-28T13:52:17.521491Z"
 }
