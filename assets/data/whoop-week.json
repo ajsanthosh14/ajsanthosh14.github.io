@@ -2,11 +2,20 @@
   "source": "WHOOP",
   "timezone": "America/Denver",
   "week_start": "2026-09-28",
-  "workouts": 0,
-  "training_seconds": 0,
-  "training_time": "0m",
-  "average_strain": null,
-  "peak_hr": null,
-  "activities": [],
-  "updated_at": "2026-09-28T13:52:17.521491Z"
+  "workouts": 2,
+  "training_seconds": 5412,
+  "training_time": "1h 30m",
+  "average_strain": 13.6,
+  "peak_hr": 195,
+  "activities": [
+    {
+      "sport": "Running",
+      "count": 1
+    },
+    {
+      "sport": "Weightlifting",
+      "count": 1
+    }
+  ],
+  "updated_at": "2026-09-29T08:28:54.248825Z"
 }
