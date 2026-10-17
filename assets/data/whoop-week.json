@@ -2,12 +2,16 @@
   "source": "WHOOP",
   "timezone": "America/Denver",
   "week_start": "2026-10-12",
-  "workouts": 7,
-  "training_seconds": 23346,
-  "training_time": "6h 29m",
-  "average_strain": 10.8,
-  "peak_hr": 192,
+  "workouts": 8,
+  "training_seconds": 28192,
+  "training_time": "7h 50m",
+  "average_strain": 11.7,
+  "peak_hr": 195,
   "activities": [
+    {
+      "sport": "Muay Thai",
+      "count": 2
+    },
     {
       "sport": "Walking",
       "count": 2
@@ -21,13 +25,9 @@
       "count": 1
     },
     {
-      "sport": "Muay Thai",
-      "count": 1
-    },
-    {
       "sport": "Running",
       "count": 1
     }
   ],
-  "updated_at": "2026-10-17T00:28:07.433142Z"
+  "updated_at": "2026-10-17T22:16:46.724851Z"
 }
