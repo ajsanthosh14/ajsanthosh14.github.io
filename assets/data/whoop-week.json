@@ -2,11 +2,16 @@
   "source": "WHOOP",
   "timezone": "America/Denver",
   "week_start": "2026-10-19",
-  "workouts": 0,
-  "training_seconds": 0,
-  "training_time": "0m",
-  "average_strain": null,
-  "peak_hr": null,
-  "activities": [],
-  "updated_at": "2026-10-19T13:11:45.341641Z"
+  "workouts": 1,
+  "training_seconds": 4106,
+  "training_time": "1h 8m",
+  "average_strain": 16.3,
+  "peak_hr": 195,
+  "activities": [
+    {
+      "sport": "Running",
+      "count": 1
+    }
+  ],
+  "updated_at": "2026-10-20T04:48:41.812912Z"
 }
