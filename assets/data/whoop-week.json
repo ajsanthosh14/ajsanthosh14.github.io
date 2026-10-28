@@ -2,20 +2,24 @@
   "source": "WHOOP",
   "timezone": "America/Denver",
   "week_start": "2026-10-26",
-  "workouts": 2,
-  "training_seconds": 10702,
-  "training_time": "2h 58m",
-  "average_strain": 15.6,
+  "workouts": 4,
+  "training_seconds": 14120,
+  "training_time": "3h 55m",
+  "average_strain": 10.9,
   "peak_hr": 188,
   "activities": [
     {
-      "sport": "Functional Fitness",
+      "sport": "Martial Arts",
+      "count": 2
+    },
+    {
+      "sport": "Activity",
       "count": 1
     },
     {
-      "sport": "Martial Arts",
+      "sport": "Functional Fitness",
       "count": 1
     }
   ],
-  "updated_at": "2026-10-28T08:28:28.664743Z"
+  "updated_at": "2026-10-28T22:33:25.523345Z"
 }
