@@ -2,15 +2,15 @@
   "source": "WHOOP",
   "timezone": "America/Denver",
   "week_start": "2026-11-09",
-  "workouts": 3,
-  "training_seconds": 10859,
-  "training_time": "3h 1m",
-  "average_strain": 11.9,
+  "workouts": 4,
+  "training_seconds": 13416,
+  "training_time": "3h 44m",
+  "average_strain": 12.4,
   "peak_hr": 183,
   "activities": [
     {
       "sport": "Functional Fitness",
-      "count": 1
+      "count": 2
     },
     {
       "sport": "Muay Thai",
@@ -21,5 +21,5 @@
       "count": 1
     }
   ],
-  "updated_at": "2026-11-12T09:49:04.637706Z"
+  "updated_at": "2026-11-13T01:03:41.122346Z"
 }
