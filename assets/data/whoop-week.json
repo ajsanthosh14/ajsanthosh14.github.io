@@ -1,33 +1,12 @@
 {
   "source": "WHOOP",
   "timezone": "America/Denver",
-  "week_start": "2026-11-09",
-  "workouts": 16,
-  "training_seconds": 20917,
-  "training_time": "5h 49m",
-  "average_strain": 8.4,
-  "peak_hr": 183,
-  "activities": [
-    {
-      "sport": "Running",
-      "count": 7
-    },
-    {
-      "sport": "Rowing",
-      "count": 5
-    },
-    {
-      "sport": "Functional Fitness",
-      "count": 2
-    },
-    {
-      "sport": "Muay Thai",
-      "count": 1
-    },
-    {
-      "sport": "Weightlifting",
-      "count": 1
-    }
-  ],
-  "updated_at": "2026-11-16T06:25:17.047690Z"
+  "week_start": "2026-11-16",
+  "workouts": 0,
+  "training_seconds": 0,
+  "training_time": "0m",
+  "average_strain": null,
+  "peak_hr": null,
+  "activities": [],
+  "updated_at": "2026-11-16T18:30:51.150275Z"
 }
