@@ -2,11 +2,16 @@
   "source": "WHOOP",
   "timezone": "America/Denver",
   "week_start": "2026-11-16",
-  "workouts": 0,
-  "training_seconds": 0,
-  "training_time": "0m",
-  "average_strain": null,
-  "peak_hr": null,
-  "activities": [],
-  "updated_at": "2026-11-16T18:30:51.150275Z"
+  "workouts": 1,
+  "training_seconds": 4936,
+  "training_time": "1h 22m",
+  "average_strain": 17.7,
+  "peak_hr": 183,
+  "activities": [
+    {
+      "sport": "Functional Fitness",
+      "count": 1
+    }
+  ],
+  "updated_at": "2026-11-17T02:54:54.048390Z"
 }
