@@ -2,11 +2,16 @@
   "source": "WHOOP",
   "timezone": "America/Denver",
   "week_start": "2026-11-23",
-  "workouts": 0,
-  "training_seconds": 0,
-  "training_time": "0m",
-  "average_strain": null,
-  "peak_hr": null,
-  "activities": [],
-  "updated_at": "2026-11-23T07:34:58.103915Z"
+  "workouts": 1,
+  "training_seconds": 1499,
+  "training_time": "25m",
+  "average_strain": 8.8,
+  "peak_hr": 163,
+  "activities": [
+    {
+      "sport": "Hiit",
+      "count": 1
+    }
+  ],
+  "updated_at": "2026-11-24T17:41:27.608515Z"
 }
