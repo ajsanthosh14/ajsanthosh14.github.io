@@ -2,12 +2,16 @@
   "source": "WHOOP",
   "timezone": "America/Denver",
   "week_start": "2026-11-23",
-  "workouts": 3,
-  "training_seconds": 3935,
-  "training_time": "1h 6m",
-  "average_strain": 10.1,
+  "workouts": 4,
+  "training_seconds": 6405,
+  "training_time": "1h 47m",
+  "average_strain": 11.3,
   "peak_hr": 195,
   "activities": [
+    {
+      "sport": "Running",
+      "count": 2
+    },
     {
       "sport": "Functional Fitness",
       "count": 1
@@ -15,11 +19,7 @@
     {
       "sport": "Hiit",
       "count": 1
-    },
-    {
-      "sport": "Running",
-      "count": 1
     }
   ],
-  "updated_at": "2026-11-25T02:25:54.677057Z"
+  "updated_at": "2026-11-26T10:51:48.576818Z"
 }
